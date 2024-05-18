@@ -10,7 +10,7 @@ const Viewreport = () => {
   useEffect(() => {
     const fetchStaff = async () => {
       try {
-        const response = await fetch('http://localhost:8000/api/v1/staff/get-allstaff');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/staff/get-allstaff`);
         const data = await response.json();
         setStaffList(data.staff);
       } catch (error) {
@@ -25,7 +25,7 @@ const Viewreport = () => {
     e.preventDefault();
     
     try {
-      const response = await fetch(`http://localhost:8000/api/v1/report/get-staffreport?staffId=${staffId}&date=${date}`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/report/get-staffreport?staffId=${staffId}&date=${date}`);
       const data = await response.json();
       
       if (response.ok) {
