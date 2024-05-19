@@ -174,7 +174,7 @@ const AddStaff = () => {
         <>
             <div className="container mx-auto mt-10">
                 <div className="bg-white p-10 rounded-lg shadow-lg w-full max-w-full mx-auto">
-                    <div className="flex justify-center items-center gap-4 flex-col mb-6 bg-red-200 p-3">
+                    <div className="flex justify-center items-center gap-4 flex-col mb-6">
                         <h1 className="text-3xl font-bold text-blue-600">Add Staff</h1>
                         <Icon icon="guidance:care-staff-area" width={50} />
                     </div>

@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import Confetti from 'react-confetti';
 
 const AddReportForm = () => {
     const [date, setDate] = useState('');
     const [report, setReport] = useState('');
     const [message, setMessage] = useState('');
+    const [showConfetti, setShowConfetti] = useState(false);
 
     const user = sessionStorage.getItem('user');
     const parsedUser = user ? JSON.parse(user) : null;
     const staffId = parsedUser ? parsedUser.id : null;
-
-  
 
     useEffect(() => {
         // Set today's date as the default value for the date input
@@ -34,6 +34,8 @@ const AddReportForm = () => {
         if (response.ok) {
             setDate(new Date().toISOString().split('T')[0]); // Reset to today's date
             setReport('');
+            setShowConfetti(true); // Show confetti
+            setTimeout(() => setShowConfetti(false), 5000); // Hide confetti after 5 seconds
         }
     };
 
@@ -69,6 +71,7 @@ const AddReportForm = () => {
                 </div>
             </form>
             {message && <div className="mt-4 text-center text-blue-600">{message}</div>}
+            {showConfetti && <Confetti />}
         </div>
     );
 };
