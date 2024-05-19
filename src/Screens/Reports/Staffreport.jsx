@@ -42,7 +42,6 @@ const AddReportForm = () => {
     return (
         <div className="container mx-auto mt-5 p-5">
             <h2 className="mb-4 text-center text-blue-600">Add Report</h2>
-            {message && <div className="alert alert-info">{message}</div>}
             <form onSubmit={handleSubmit} className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div className="mb-4">
                     <label htmlFor="date" className="block text-gray-700 text-sm font-bold mb-2">Date</label>
@@ -70,7 +69,7 @@ const AddReportForm = () => {
                     <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
                 </div>
             </form>
-            {message && <div className="mt-4 text-center text-blue-600">{message}</div>}
+            {message && <div className="mt-4 text-center text-black bg-blue-400">{message}</div>}
             {showConfetti && <Confetti />}
         </div>
     );

@@ -7,12 +7,14 @@ const Stafflogin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+       const [loading, setLoading] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);  // New state to track the success status
 
     const navigate = useNavigate()
 
     const handleLogin = async (e) => {
         e.preventDefault();
+        setLoading(true);
         setMessage('');
         setIsSuccess(false);
 
@@ -29,6 +31,7 @@ const Stafflogin = () => {
             if (response.ok) {
                 setMessage(data.message);
                 setIsSuccess(true);  // Set success status to true
+                setLoading(false);
                 sessionStorage.setItem('user', JSON.stringify(data));
                 navigate('/dashboard')
                 toast.success(data.message)
@@ -37,6 +40,7 @@ const Stafflogin = () => {
                 setIsSuccess(false);  // Set success status to false
             }
         } catch (error) {
+            setLoading(false);
             setMessage('An error occurred. Please try again.');
             setIsSuccess(false);  // Set success status to false
         }
@@ -70,11 +74,12 @@ const Stafflogin = () => {
                         />
                     </div>
                     <button
-                        type="submit"
-                        className="w-full px-4 py-2 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    >
-                        Login
-                    </button>
+                            type="submit"
+                            className="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                            disabled={loading}
+                        >
+                            {loading ? 'Logging in...' : 'Login'}
+                        </button>
                     {message && (
                         <p className={`text-center ${isSuccess ? 'text-green-500' : 'text-red-500'}`}>
                             {message}
