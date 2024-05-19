@@ -45,6 +45,8 @@ const MarkAttendance = () => {
     getClientIP();
   }, []);
 
+  console.log(clientIP)
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
       <form className="bg-white p-6 rounded-lg shadow-lg w-full max-w-sm" onSubmit={handleSubmit}>
