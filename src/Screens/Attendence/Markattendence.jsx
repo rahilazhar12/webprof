@@ -27,8 +27,14 @@ const MarkAttendance = () => {
 
     if (response.ok) {
       setMessage(data.message);
+      setTimeout(() => {
+        setMessage('');
+      }, 3000);
     } else {
       setMessage(`Error: ${data.message}`);
+      setTimeout(() => {
+        setMessage('');
+      }, 3000);
     }
   };
 

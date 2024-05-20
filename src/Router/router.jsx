@@ -11,6 +11,7 @@ import ProtectedRoutes from "../Components/ProtectedRoutes/ProtectedRoutes";
 import UnauthorizedAccess from "../Screens/Error/Unathorizedaccess";
 import WelcomePage from "../Screens/Welocme/Welcomepage"; // Corrected path spelling
 import Markattendence from "../Screens/Attendence/Markattendence";
+import AttendanceTable from "../Screens/Reports/Attendancestaff";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +28,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <WelcomePage /> },
       { path: "add-staff", element: <ProtectedRoutes element={<Addstaff />} allowedRoles={["Admin"]} /> },
+      { path: "staff-attendance-report", element: <ProtectedRoutes element={<AttendanceTable/>} allowedRoles={["Admin"]} /> },
       { path: "staff-report", element: <Staffreport /> },
       { path: "staff-attendence", element: <Markattendence/> },
       { path: "view-report", element: <ProtectedRoutes element={<Viewreport />} allowedRoles={["Admin"]} /> },
