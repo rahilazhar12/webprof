@@ -10,7 +10,7 @@ const AttendanceTable = () => {
 
     const fetchAttendance = async () => {
         try {
-            const response = await fetch('http://localhost:8000/api/v1/attendence/attendance/date?date=' + formatDate(new Date()));
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/attendence/attendance/date?date=` + formatDate(new Date()));
             const data = await response.json();
             setAttendanceRecords(data.attendance);
         } catch (error) {
