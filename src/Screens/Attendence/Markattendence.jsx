@@ -5,6 +5,7 @@ const MarkAttendance = () => {
   const [status, setStatus] = useState('Present');
   const [message, setMessage] = useState('');
   const [clientIP, setClientIP] = useState(null);
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   const user = sessionStorage.getItem('user');
   const parsedUser = user ? JSON.parse(user) : null;
@@ -42,10 +43,21 @@ const MarkAttendance = () => {
   }
 
   useEffect(() => {
+    // Set today's date
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    setDate(`${yyyy}-${mm}-${dd}`);
     getClientIP();
-  }, []);
 
-  console.log(clientIP)
+    // Update current time every second
+    const timer = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4">
@@ -54,9 +66,9 @@ const MarkAttendance = () => {
         <input
           type="date"
           value={date}
-          onChange={(e) => setDate(e.target.value)}
           className="w-full p-2 border border-gray-300 rounded mb-4"
           required
+          disabled
         />
         <select
           value={status}
@@ -66,6 +78,9 @@ const MarkAttendance = () => {
           <option value="Present">Present</option>
           <option value="Absent">Absent</option>
         </select>
+        <div className="text-center mb-4">
+          <span className="text-lg font-mono">{currentTime.toLocaleTimeString()}</span>
+        </div>
         <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600">
           Submit
         </button>
