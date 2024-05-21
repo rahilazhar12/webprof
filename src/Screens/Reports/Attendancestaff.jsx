@@ -45,14 +45,14 @@ const AttendanceTable = () => {
             const pdf = new jsPDF('p', 'mm', 'a4');
             const imgWidth = 210; // A4 width in mm
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
-    
+
             pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight, undefined, 'FAST');
-    
+
             // Add watermark with today's date
             const watermarkText = `Generated on ${formatDate(new Date())}`;
             pdf.setFontSize(30);
             pdf.setTextColor(150, 150, 150);
-    
+
             // Calculate the center position for the watermark
             const pageWidth = pdf.internal.pageSize.getWidth();
             const pageHeight = pdf.internal.pageSize.getHeight();
@@ -60,15 +60,14 @@ const AttendanceTable = () => {
             const textHeight = pdf.internal.getFontSize() / pdf.internal.scaleFactor;
             const x = (pageWidth - textWidth) / 2;
             const y = (pageHeight - textHeight) / 2;
-    
+
             pdf.text(watermarkText, x, y, {
                 angle: 45
             });
-    
+
             pdf.save(`attendance-report-${formatDate(new Date())}.pdf`);
         });
     };
-    
 
     return (
         <div className="container mx-auto px-4 py-8">
@@ -92,7 +91,7 @@ const AttendanceTable = () => {
                     </div>
                 </div>
             ) : (
-                <div id="attendance-table">
+                <div id="attendance-table" className="overflow-x-auto">
                     <table className="w-full table-auto">
                         <thead>
                             <tr className="bg-gray-200">

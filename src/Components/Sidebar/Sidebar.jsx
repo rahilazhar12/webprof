@@ -25,6 +25,10 @@ const Sidebar = () => {
     setSidebarOpen(!isSidebarOpen);
   };
 
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
   const handleClickOutside = (event) => {
     if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
       setSidebarOpen(false);
@@ -74,8 +78,9 @@ const Sidebar = () => {
                   <Link
                     to="/dashboard/staff-attendence"
                     className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    onClick={closeSidebar}
                   >
-                   <IoCheckmarkDoneSharp className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
+                    <IoCheckmarkDoneSharp className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                     <span className="ms-3">Mark Attendence</span>
                   </Link>
                 </li>
@@ -85,6 +90,7 @@ const Sidebar = () => {
                   <Link
                     to="/dashboard/staff-report"
                     className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    onClick={closeSidebar}
                   >
                     <svg
                       className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -105,6 +111,7 @@ const Sidebar = () => {
                   <Link
                     to="/dashboard/staff-attendance-report"
                     className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    onClick={closeSidebar}
                   >
                     <SiBasicattentiontoken className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                     <span className="ms-3">Attendance Report</span>
@@ -116,6 +123,7 @@ const Sidebar = () => {
                   <Link
                     to="/admin-register"
                     className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    onClick={closeSidebar}
                   >
                     <RiAdminFill className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                     <span className="ms-3">Add Admin</span>
@@ -127,6 +135,7 @@ const Sidebar = () => {
                   <Link
                     to="/dashboard/add-staff"
                     className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    onClick={closeSidebar}
                   >
                     <IoIosPersonAdd className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                     <span className="ms-3">Add Staff</span>
@@ -138,6 +147,7 @@ const Sidebar = () => {
                   <Link
                     to="/dashboard/view-report"
                     className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    onClick={closeSidebar}
                   >
                     <GoReport className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                     <span className="ms-3">Staff Daily Report</span>
@@ -148,6 +158,7 @@ const Sidebar = () => {
                 <Link
                   to="/dashboard/staff-report"
                   className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                  onClick={closeSidebar}
                 >
                   <FaSignOutAlt className="w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"/>
                   <span className="ms-3">Signout</span>
