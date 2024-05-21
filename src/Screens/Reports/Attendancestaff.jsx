@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const AttendanceTable = () => {
     const [attendanceRecords, setAttendanceRecords] = useState([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [loading, setLoading] = useState(true);
+    const [selectedDate, setSelectedDate] = useState(new Date());
 
     useEffect(() => {
         fetchAttendance();
-    }, []);
+    }, [selectedDate]);
 
     const fetchAttendance = async () => {
         try {
-            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/attendence/attendance/date?date=` + formatDate(new Date()));
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/attendence/attendance/date?date=` + formatDate(selectedDate));
             const data = await response.json();
             setAttendanceRecords(data.attendance);
             setLoading(false);
@@ -71,23 +74,31 @@ const AttendanceTable = () => {
 
     return (
         <div className="container mx-auto px-4 py-8">
-            <input
-                type="text"
-                placeholder="Search by staff name"
-                value={searchTerm}
-                onChange={handleSearchChange}
-                className="w-full max-w-md px-4 py-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
-            />
-            <button
-                onClick={downloadPDF}
-                className="mb-4 px-4 py-2 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-600 ml-5"
-            >
-                Download PDF
-            </button>
+            <div className="flex flex-col gap-2 md:flex-row items-center mb-4">
+                <DatePicker
+                    selected={selectedDate}
+                    onChange={date => setSelectedDate(date)}
+                    dateFormat="yyyy-MM-dd"
+                    className="w-full max-w-md px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                />
+                <input
+                    type="text"
+                    placeholder="Search by staff name"
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    className="w-full max-w-md px-4 py-2 ml-4 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+                />
+                <button
+                    onClick={downloadPDF}
+                    className="ml-4 px-4 py-2 bg-blue-500 text-white rounded-md focus:outline-none hover:bg-blue-600"
+                >
+                    Download PDF
+                </button>
+            </div>
             {loading ? (
                 <div className="flex justify-center items-center h-screen">
                     <div className="loader">
-                        <span className="loader-text">WS</span>
+                        <span className="loader-text">Loading...</span>
                     </div>
                 </div>
             ) : (
