@@ -15,16 +15,18 @@ const AttendanceTable = () => {
     }, [selectedDate]);
 
     const fetchAttendance = async () => {
+        setLoading(true); // Set loading to true before making the fetch request
         try {
             const response = await fetch(`${import.meta.env.VITE_API_URL}/api/v1/attendence/attendance/date?date=` + formatDate(selectedDate));
             const data = await response.json();
             setAttendanceRecords(data.attendance);
-            setLoading(false);
         } catch (error) {
             console.error('Error fetching attendance:', error);
-            setLoading(false);
+        } finally {
+            setLoading(false); // Set loading to false after the fetch request is complete (whether successful or not)
         }
     };
+    
 
     const formatDate = (date) => {
         const year = date.getFullYear();
@@ -72,6 +74,8 @@ const AttendanceTable = () => {
         });
     };
 
+    console.log(attendanceRecords , 'attendance record')
+
     return (
         <div className="container mx-auto px-4 py-8">
             <div className="flex flex-col gap-2 md:flex-row items-center mb-4">
@@ -98,7 +102,7 @@ const AttendanceTable = () => {
             {loading ? (
                 <div className="flex justify-center items-center h-screen">
                     <div className="loader">
-                        <span className="loader-text">Loading...</span>
+                        <span className="loader-text">WS</span>
                     </div>
                 </div>
             ) : (
