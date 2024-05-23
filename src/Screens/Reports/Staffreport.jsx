@@ -70,6 +70,9 @@ const AddReportForm = () => {
         }
     };
 
+    const today = new Date().toISOString().split('T')[0]
+    console.log(today)
+
     return (
         <div className="container mx-auto mt-5 p-5 max-w-2xl">
             <h2 className="mb-6 text-center text-3xl font-bold text-blue-600">Add Report</h2>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 const Viewreport = () => {
   const [staffId, setStaffId] = useState('');
-  const [date, setDate] = useState('');
+  const [date, setDate] = useState(() => new Date().toISOString().split('T')[0]); // Default to today's date
   const [reports, setReports] = useState([]);
   const [staffList, setStaffList] = useState([]);
   const [message, setMessage] = useState('');
@@ -104,8 +104,8 @@ const Viewreport = () => {
                             {report.tasks.map((task, index) => (
                               <tr key={index}>
                                 <td className="px-6 py-4 whitespace-nowrap">{task.description}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">{new Date(task.startTime).toLocaleTimeString()}</td>
-                                <td className="px-6 py-4 whitespace-nowrap">{new Date(task.endTime).toLocaleTimeString()}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{new Date(task.startTime).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">{new Date(task.endTime).toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}</td>
                                 <td className="px-6 py-4 whitespace-nowrap">{task.totalTime}</td>
                               </tr>
                             ))}

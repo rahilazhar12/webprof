@@ -122,7 +122,7 @@ const AttendanceTable = () => {
                             {filteredRecords.map(record => (
                                 <tr key={record._id} className={record.timelinessStatus === 'Late' ? 'bg-red-100' : ''}>
                                     <td className="px-4 py-2">{record.staffId.name}</td>
-                                    <td className="px-4 py-2">{record.status}</td>
+                                    <td className={`px-4 py-2 ${record.status === 'Absent' ? 'bg-yellow-200' : ''}`}>{record.status}</td>
                                     <td className="px-4 py-2">{record.timelinessStatus}</td>
                                     <td className="px-4 py-2">{record.checkInTime}</td>
                                     <td className="px-4 py-2">{record.checkOutTime}</td>
